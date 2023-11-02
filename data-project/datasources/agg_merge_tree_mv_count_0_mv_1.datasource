@@ -1,0 +1,9 @@
+# Data Source created from Pipe 'agg_merge_tree_mv_count'
+
+SCHEMA >
+    `day` DateTime,
+    `total_click_agg_merge` AggregateFunction(count)
+
+ENGINE "AggregatingMergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(day)"
+ENGINE_SORTING_KEY "day"

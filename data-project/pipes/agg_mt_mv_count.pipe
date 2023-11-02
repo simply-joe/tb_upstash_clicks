@@ -1,0 +1,11 @@
+TOKEN "agg_mt_mv_count_endpoint_read_2212" READ
+
+NODE total_clicks_all
+DESCRIPTION >
+    undefined
+
+SQL >
+
+    select countMerge(total_click_agg_merge) as total_clicks_all FROM agg_merge_tree_mv_count_0_mv
+
+

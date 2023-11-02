@@ -1,0 +1,18 @@
+NODE agg_merge_tree_mv_count_0
+DESCRIPTION >
+    undefined
+
+SQL >
+
+    SELECT
+        toStartOfDay(__timestamp) AS day,
+        countState() AS total_click_agg_merge
+    FROM kafka_ds_363823
+    GROUP BY day
+
+TYPE materialized
+DATASOURCE agg_merge_tree_mv_count_0_mv_1
+ENGINE "AggregatingMergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(day)"
+ENGINE_SORTING_KEY "day"
+

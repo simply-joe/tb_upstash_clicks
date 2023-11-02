@@ -1,0 +1,5 @@
+# Ignore virtualenv 
+.e
+
+# Ignore TB authentication file
+data-project/.tinyb
