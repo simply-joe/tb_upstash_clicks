@@ -3,18 +3,24 @@ type = "stdin"
 
 [sinks.upstash]
 type = "kafka"
-inputs = [ "to_metric" ]
+inputs = [ "in" ]
 bootstrap_servers = "sweeping-ant-9955-us1-kafka.upstash.io:9092"
 topic = "clicks_aggregates"
+encoding.codec = "json"
+sasl.mechanism = "SCRAM-SHA-256"
+sasl.username = "c3dlZXBpbmctYW50LTk5NTUksB2CLbXbV0AcF-7JXjryA3D4Y7BqaFfBqV84V2E"
+sasl.password = ${{ secrets.upstash_password }}
+[sinks.upstash.librdkafka_options]
+    security_protocol = "SASL_SSL"
 
 [sinks.console]
-inputs = ["parse"]
+inputs = ["in"]
 type = "console"
 encoding.codec = "json"
 
 [sinks.tinybird]
-inputs = ["parse"]
+inputs = ["in"]
 type = "http"
-uri = "https://api.us-east.tinybird.co/v0/events?name=agg_merge_tree_mv_count_0_mv_1&token=p.eyJ1IjogIjMwYWQ4YmE0LWE2NWQtNDYwYy1iNjY1LTg4MmQ1NTAyNjYyZCIsICJpZCI6ICIzMzMwNjY5ZC01YmUyLTRkYjEtOWE4OC04ZGJmZmRlYjJhODQiLCAiaG9zdCI6ICJ1c19lYXN0In0.JtmWpPC7VshMmzJrm-4REgsrUe2Y1jSgYw5u2Bd8zmE"
-encoding.codec = "ndjson"
+uri = "https://api.us-east.tinybird.co/v0/events?name=test_ds&token=p.eyJ1IjogIjMwYWQ4YmE0LWE2NWQtNDYwYy1iNjY1LTg4MmQ1NTAyNjYyZCIsICJpZCI6ICIzMzMwNjY5ZC01YmUyLTRkYjEtOWE4OC04ZGJmZmRlYjJhODQiLCAiaG9zdCI6ICJ1c19lYXN0In0.JtmWpPC7VshMmzJrm-4REgsrUe2Y1jSgYw5u2Bd8zmE"
+encoding.codec = "json"
 encoding.only_fields = ["day", "total_click_agg_merge"]
