@@ -20,3 +20,4 @@ jobs:
         curl "https://api.us-east.tinybird.co/v0/pipes/agg_merge_tree_mv_count.ndjson?token=${TB_TOKEN}" | ~/.vector/bin/vector --config ./vector.toml
       env:
         TB_TOKEN: ${{ secrets.TB_TOKEN }}
+        UPSTASH_TOKEN: ${{ secrets.UPSTASH_PASSWORD }}
