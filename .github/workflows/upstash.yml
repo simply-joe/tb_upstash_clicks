@@ -13,11 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - run: sudo apt-get install --yes curl bc
-    - run:  curl --proto '=https' --tlsv1.2 -sSf https://sh.vector.dev | bash -s -- -y
+    - run:  curl --proto '=https' --tlsv1.2 -sSfL https://sh.vector.dev | bash -s -- -y
     - run: ~/.vector/bin/vector --version
     - name: total_clicks_to_upstash
       run: |
-        curl "https://${TB_HOST}.tinybird.co/v0/pipes/ep_datadog_pipes_stats.ndjson?token=${TB_TOKEN}" | ~/.vector/bin/vector --config ./vector.toml
+        curl "https://${TB_HOST}.tinybird.co/v0/pipes/.ndjson?token=${TB_TOKEN}" | ~/.vector/bin/vector --config ./vector.toml
       env:
         TB_TOKEN: ${{ secrets.TB_TOKEN }}
         TB_HOST: ${{ secrets.TB_HOST }}
